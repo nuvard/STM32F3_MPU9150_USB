@@ -1,7 +1,3 @@
-<http://microtechnics.ru/mikrokontroller-stm32-i-usb/>
-
-
-<http://microtechnics.ru/stm32-peredacha-dannyx-po-usb/>
-
-
-<http://www.quizful.net/post/java-serial-ports>
+http://microtechnics.ru/mikrokontroller-stm32-i-usb/
+http://microtechnics.ru/stm32-peredacha-dannyx-po-usb/
+http://www.quizful.net/post/java-serial-ports
