@@ -18,6 +18,7 @@
 *.scr  	# define exception below if needed
 
 # Object and HEX files
+Objects
 *.axf
 *.b[0-3][0-9]
 *.hex
@@ -38,7 +39,9 @@
 *._ii
 
 # Debugger files
+DebugConfig
 *.ini  	# define exception below if needed
+*.dbgconf
 
 # Other files
 *.build_log.htm

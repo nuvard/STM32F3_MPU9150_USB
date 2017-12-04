@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usb_endp.c
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    29-June-2012
+  * @version V4.0.0
+  * @date    21-January-2013
   * @brief   Endpoint routines
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2013 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@
 #include "usb_lib.h"
 #include "usb_desc.h"
 #include "usb_mem.h"
-//#include "hw_config.h"
+#include "hw_config.h"
 #include "usb_istr.h"
 #include "usb_pwr.h"
 
@@ -43,11 +43,11 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint8_t USB_Rx_Buffer[VIRTUAL_COM_PORT_DATA_SIZE];
-//extern  uint8_t USART_Rx_Buffer[];
-//extern uint32_t USART_Rx_ptr_out;
-//extern uint32_t USART_Rx_length;
-//extern uint8_t  USB_Tx_State;
-u32 count_out = 0;
+extern  uint8_t USART_Rx_Buffer[];
+extern uint32_t USART_Rx_ptr_out;
+extern uint32_t USART_Rx_length;
+extern uint8_t  USB_Tx_State;
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -59,43 +59,7 @@ u32 count_out = 0;
 * Return         : None.
 *******************************************************************************/
 void EP1_IN_Callback (void)
-{
-//  uint16_t USB_Tx_ptr;
-//  uint16_t USB_Tx_length;
-//  
-//  if (USB_Tx_State == 1)
-//  {
-//    if (USART_Rx_length == 0) 
-//    {
-//      USB_Tx_State = 0;
-//    }
-//    else 
-//    {
-//      if (USART_Rx_length > VIRTUAL_COM_PORT_DATA_SIZE){
-//        USB_Tx_ptr = USART_Rx_ptr_out;
-//        USB_Tx_length = VIRTUAL_COM_PORT_DATA_SIZE;
-//        
-//        USART_Rx_ptr_out += VIRTUAL_COM_PORT_DATA_SIZE;
-//        USART_Rx_length -= VIRTUAL_COM_PORT_DATA_SIZE;    
-//      }
-//      else 
-//      {
-//        USB_Tx_ptr = USART_Rx_ptr_out;
-//        USB_Tx_length = USART_Rx_length;
-//        
-//        USART_Rx_ptr_out += USART_Rx_length;
-//        USART_Rx_length = 0;
-//      }
-//      
-//#ifdef USE_STM3210C_EVAL
-//      USB_SIL_Write(EP1_IN, &USART_Rx_Buffer[USB_Tx_ptr], USB_Tx_length);  
-//#else
-//      UserToPMABufferCopy(&USART_Rx_Buffer[USB_Tx_ptr], ENDP1_TXADDR, USB_Tx_length);
-//      SetEPTxCount(ENDP1, USB_Tx_length);
-//      SetEPTxValid(ENDP1); 
-//#endif  
-//    }
-//  }
+{  
 }
 
 /*******************************************************************************
@@ -107,25 +71,58 @@ void EP1_IN_Callback (void)
 *******************************************************************************/
 void EP3_OUT_Callback(void)
 {
-  //uint16_t USB_Rx_Cnt;
+  uint16_t USB_Rx_Cnt;
   
   /* Get the received data buffer and update the counter */
-  //USB_Rx_Cnt = USB_SIL_Read(EP3_OUT, USB_Rx_Buffer);
+  USB_Rx_Cnt = USB_SIL_Read(EP3_OUT, USB_Rx_Buffer);
   
   /* USB data will be immediately processed, this allow next USB traffic being 
   NAKed till the end of the USART Xfer */
-  
-  //USB_To_USART_Send_Data(USB_Rx_Buffer, USB_Rx_Cnt);
-
-	//count_out = GetEPRxCount(ENDP3);
-	count_out = USB_SIL_Read(EP3_OUT, USB_Rx_Buffer);
-  //PMAToUserBufferCopy(USB_Rx_Buffer, ENDP3_RXADDR, count_out); // Copy a buffer from packet memory area (PMA) to user memory area, Hari
-  //SetEPRxValid(ENDP3);
-	
-#ifndef STM32F10X_CL
+	switch(USB_Rx_Buffer[0])
+	{
+		case 0x01:
+			GPIO_ResetLeds();		
+			GPIO_Write(GPIOE, 0x0100);
+			break;
+		
+		case 0x02:
+			GPIO_ResetLeds();		
+			GPIO_Write(GPIOE, 0x0300);
+			break;
+		
+		case 0x03:
+			GPIO_ResetLeds();		
+			GPIO_Write(GPIOE, 0x0700);
+			break;
+		
+		case 0x04:
+			GPIO_ResetLeds();		
+			GPIO_Write(GPIOE, 0x0F00);
+			break;
+		
+		case 0x05:
+			GPIO_ResetLeds();		
+			GPIO_Write(GPIOE, 0x1F00);
+			break;
+		
+		case 0x06:
+			GPIO_ResetLeds();		
+			GPIO_Write(GPIOE, 0x3F00);
+			break;
+		
+		case 0x07:
+			GPIO_ResetLeds();		
+			GPIO_Write(GPIOE, 0x7F00);
+			break;
+		
+		case 0x08:
+			GPIO_ResetLeds();		
+			GPIO_Write(GPIOE, 0xFF00);
+			break;
+	}
+ 
   /* Enable the receive of data on EP3 */
   SetEPRxValid(ENDP3);
-#endif /* STM32F10X_CL */
 }
 
 
@@ -136,25 +133,21 @@ void EP3_OUT_Callback(void)
 * Output         : None.
 * Return         : None.
 *******************************************************************************/
-#ifdef STM32F10X_CL
-void INTR_SOFINTR_Callback(void)
-#else
 void SOF_Callback(void)
-#endif /* STM32F10X_CL */
 {
-//  static uint32_t FrameCount = 0;
-//  
-//  if(bDeviceState == CONFIGURED)
-//  {
-//    if (FrameCount++ == VCOMPORT_IN_FRAME_INTERVAL)
-//    {
-//      /* Reset the frame counter */
-//      FrameCount = 0;
-//      
-//      /* Check the data to be sent through IN pipe */
-//      Handle_USBAsynchXfer();
-//    }
-//  }  
+  static uint32_t FrameCount = 0;
+  
+  if(bDeviceState == CONFIGURED)
+  {
+    if (FrameCount++ == VCOMPORT_IN_FRAME_INTERVAL)
+    {
+      /* Reset the frame counter */
+      FrameCount = 0;
+      
+      /* Check the data to be sent through IN pipe */
+      Handle_USBAsynchXfer();
+    }
+  }  
 }
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

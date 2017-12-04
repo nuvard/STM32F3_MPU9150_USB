@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm32_it.h
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    29-June-2012
+  * @version V4.0.0
+  * @date    21-January-2013
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2013 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -31,7 +31,8 @@
 #define __STM32_IT_H
 
 /* Includes ------------------------------------------------------------------*/
-//#include "platform_config.h"
+#include "platform_config.h"
+
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -45,24 +46,14 @@ void UsageFault_Handler(void);
 void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
-//void SysTick_Handler(void); //hari
-
-#ifndef STM32F10X_CL
+void SysTick_Handler(void);
 void USB_LP_CAN1_RX0_IRQHandler(void);
-#endif /* STM32F10X_CL */
 
-//#if defined (USE_STM3210B_EVAL) || defined (USE_STM3210E_EVAL) || defined(STM32L1XX_HD) || defined(STM32L1XX_MD_PLUS) 
+#if defined (USE_STM32L152_EVAL) || (USE_STM32373C_EVAL)
+void USART2_IRQHandler(void);
+#else
 void USART1_IRQHandler(void);
-//#endif /* USE_STM3210B_EVAL or USE_STM3210E_EVAL */
-//
-//#ifdef USE_STM3210C_EVAL 
-//void USART2_IRQHandler(void);
-//#endif /* USE_STM3210C_EVAL */
-
-#ifdef STM32F10X_CL
-void OTG_FS_IRQHandler(void);
-#endif /* STM32F10X_CL */
-
+#endif /* USE_STM32L152_EVAL */
 #endif /* __STM32_IT_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

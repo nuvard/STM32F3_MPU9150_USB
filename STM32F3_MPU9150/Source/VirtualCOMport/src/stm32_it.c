@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    stm32_it.c
   * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    29-June-2012
+  * @version V4.0.0
+  * @date    21-January-2013
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and peripherals
   *          interrupt service routine.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2013 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-//#include "hw_config.h"
+#include "hw_config.h"
 #include "stm32_it.h"
 #include "usb_lib.h"
 #include "usb_istr.h"
@@ -154,10 +154,10 @@ void PendSV_Handler(void)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-//void SysTick_Handler(void)
-//{
-//}
-#ifndef STM32F10X_CL
+void SysTick_Handler(void)
+{
+}
+
 /*******************************************************************************
 * Function Name  : USB_IRQHandler
 * Description    : This function handles USB Low Priority interrupts
@@ -166,7 +166,7 @@ void PendSV_Handler(void)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-#if defined(STM32L1XX_MD) || defined(STM32L1XX_HD)|| defined(STM32L1XX_MD_PLUS)
+#if defined(STM32L1XX_MD) || defined(STM32L1XX_HD)|| defined(STM32L1XX_MD_PLUS)|| defined (STM32F37X)
 void USB_LP_IRQHandler(void)
 #else
 void USB_LP_CAN1_RX0_IRQHandler(void)
@@ -174,7 +174,7 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 {
   USB_Istr();
 }
-#endif /* STM32F10X_CL */
+
 /*******************************************************************************
 * Function Name  : EVAL_COM1_IRQHandler
 * Description    : This function handles EVAL_COM1 global interrupt request.
@@ -182,45 +182,37 @@ void USB_LP_CAN1_RX0_IRQHandler(void)
 * Output         : None
 * Return         : None
 *******************************************************************************/
-//void EVAL_COM1_IRQHandler(void)
-//{
-//  if (USART_GetITStatus(EVAL_COM1, USART_IT_RXNE) != RESET)
-//  {
-//    /* Send the received data to the PC Host*/
-//    USART_To_USB_Send_Data();
-//  }
-//
-//  /* If overrun condition occurs, clear the ORE flag and recover communication */
-//  if (USART_GetFlagStatus(EVAL_COM1, USART_FLAG_ORE) != RESET)
-//  {
-//    (void)USART_ReceiveData(EVAL_COM1);
-//  }
-//}
-/*******************************************************************************
-* Function Name  : USART1_IRQHandler
-* Description    : This function handles USART1 global interrupt request.
-* Input          : None
-* Output         : None
-* Return         : None
-*******************************************************************************/
-void USART1_IRQHandler(void)
+void EVAL_COM1_IRQHandler(void)
 {
-  //Uart1Isr();
+  if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
+  {
+    /* Send the received data to the PC Host*/
+    USART_To_USB_Send_Data();
+  }
+
+  /* If overrun condition occurs, clear the ORE flag and recover communication */
+  if (USART_GetFlagStatus(USART1, USART_FLAG_ORE) != RESET)
+  {
+    (void)USART_ReceiveData(USART1);
+  }
 }
 
-#ifdef STM32F10X_CL
 /*******************************************************************************
-* Function Name  : OTG_FS_IRQHandler
-* Description    : This function handles USB-On-The-Go FS global interrupt request.
+* Function Name  : USB_FS_WKUP_IRQHandler
+* Description    : This function handles USB WakeUp interrupt request.
 * Input          : None
 * Output         : None
 * Return         : None
 *******************************************************************************/
-void OTG_FS_IRQHandler(void)
+
+#if defined(STM32L1XX_MD) || defined(STM32L1XX_HD)|| defined(STM32L1XX_MD_PLUS)
+void USB_FS_WKUP_IRQHandler(void)
+#else
+void USBWakeUp_IRQHandler(void)
+#endif
 {
-  STM32_PCD_OTG_ISR_Handler(); 
+  EXTI_ClearITPendingBit(EXTI_Line18);
 }
-#endif /* STM32F10X_CL */
 
 /******************************************************************************/
 /*                 STM32 Peripherals Interrupt Handlers                   */

@@ -7,22 +7,23 @@
 
   <Targets>
     <Target>
-      <TargetName>Main Target</TargetName>
+      <TargetName>STM32F3</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STM32F303VC</Device>
+          <Device>STM32F303VCTx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F3xx_DFP.1.4.0</PackID>
+          <PackID>Keil.STM32F3xx_DFP.2.0.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x0000C000) IRAM2(0x10000000,0x00002000) IROM(0x08000000,0x00040000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F3xx_256 -FS08000000 -FL040000 -FP0($$Device:STM32F303VC$Flash\STM32F3xx_256.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F3xx_256 -FS08000000 -FL040000 -FP0($$Device:STM32F303VCTx$CMSIS\Flash\STM32F3xx_256.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:STM32F303VC$Device\Include\stm32f3xx.h</RegisterFile>
+          <RegisterFile>$$Device:STM32F303VCTx$Drivers\CMSIS\Device\ST\STM32F3xx\Include\stm32f3xx.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -32,7 +33,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:STM32F303VC$SVD\STM32F30x.svd</SFDFile>
+          <SFDFile>$$Device:STM32F303VCTx$CMSIS\SVD\STM32F30x.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -132,15 +133,15 @@
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
-            <Capability>0</Capability>
-            <DriverSelection>-1</DriverSelection>
+            <Capability>1</Capability>
+            <DriverSelection>4100</DriverSelection>
           </Flash1>
-          <bUseTDR>1</bUseTDR>
-          <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <bUseTDR>0</bUseTDR>
+          <Flash2>STLink\ST-LINKIII-KEIL_SWO.dll</Flash2>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
-          <pFcarmGrp></pFcarmGrp>
+          <pFcarmGrp>StartUp</pFcarmGrp>
           <pFcArmRoot></pFcArmRoot>
           <FcArmLst>0</FcArmLst>
         </Utilities>
@@ -333,9 +334,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define></Define>
+              <Define>USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>.\Source\main\src;.\Source\main\inc;.\Source\VirtualCOMport\src;.\Source\VirtualCOMport\inc;.\Source\USBLib\src;.\Source\USBLib\inc;.\Source\CMSIS;.\Source\SPL</IncludePath>
+              <IncludePath>.\Source;.\Source\VirtualCOMport\src;.\Source\VirtualCOMport\inc;.\Source\USBLib\src;.\Source\USBLib\inc;.\Source\SPL\src;.\Source\SPL\inc;.\Source\CMSIS</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -377,42 +378,37 @@
       </TargetOption>
       <Groups>
         <Group>
+          <GroupName>StartUp</GroupName>
+          <Files>
+            <File>
+              <FileName>startup_stm32f30x.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\startup_stm32f30x.s</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Main</GroupName>
           <Files>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Source\main\src\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\main\src\stm32_it.c</FilePath>
-            </File>
-            <File>
-              <FileName>platform_config.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\main\inc\platform_config.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32_it.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\main\inc\stm32_it.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\main\inc\stm32f30x_conf.h</FilePath>
+              <FilePath>.\Source\main.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Virtual-COM port</GroupName>
+          <GroupName>VirtualCOMport</GroupName>
           <Files>
             <File>
               <FileName>hw_config.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\VirtualCOMport\src\hw_config.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\VirtualCOMport\src\stm32_it.c</FilePath>
             </File>
             <File>
               <FileName>usb_desc.c</FileName>
@@ -445,6 +441,21 @@
               <FilePath>.\Source\VirtualCOMport\inc\hw_config.h</FilePath>
             </File>
             <File>
+              <FileName>platform_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\VirtualCOMport\inc\platform_config.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32_it.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\VirtualCOMport\inc\stm32_it.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\VirtualCOMport\inc\stm32f30x_conf.h</FilePath>
+            </File>
+            <File>
               <FileName>usb_conf.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Source\VirtualCOMport\inc\usb_conf.h</FilePath>
@@ -472,8 +483,308 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>USB Lib</GroupName>
+          <GroupName>SPL</GroupName>
           <Files>
+            <File>
+              <FileName>stm32f30x_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_can.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_comp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_comp.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_crc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_crc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_dac.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_dac.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_dbgmcu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_dbgmcu.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_exti.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_exti.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_iwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_iwdg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_misc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_misc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_opamp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_opamp.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_pwr.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_pwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_rcc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_rtc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_syscfg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_syscfg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_tim.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_wwdg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\SPL\src\stm32f30x_wwdg.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_adc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_adc.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_can.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_can.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_comp.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_comp.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_crc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_crc.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_dac.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_dac.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_dbgmcu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_dbgmcu.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_dma.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_dma.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_exti.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_exti.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_flash.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_flash.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_gpio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_gpio.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_i2c.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_i2c.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_iwdg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_iwdg.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_misc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_misc.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_opamp.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_opamp.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_pwr.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_pwr.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_rcc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_rcc.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_rtc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_rtc.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_spi.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_spi.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_syscfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_syscfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_tim.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_tim.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_usart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_usart.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_wwdg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\SPL\inc\stm32f30x_wwdg.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CMSIS</GroupName>
+          <Files>
+            <File>
+              <FileName>core_cm4.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\CMSIS\core_cm4.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\CMSIS\stm32f30x.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f30x_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\CMSIS\stm32f30x_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f30x.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\CMSIS\system_stm32f30x.c</FilePath>
+            </File>
+            <File>
+              <FileName>system_stm32f30x.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\CMSIS\system_stm32f30x.h</FilePath>
+            </File>
+            <File>
+              <FileName>core_cm4_simd.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\CMSIS\core_cm4_simd.h</FilePath>
+            </File>
+            <File>
+              <FileName>core_cmFunc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\CMSIS\core_cmFunc.h</FilePath>
+            </File>
+            <File>
+              <FileName>core_cmInstr.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\CMSIS\core_cmInstr.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>USBLib</GroupName>
+          <Files>
+            <File>
+              <FileName>usb_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\USBLib\src\usb_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_init.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\USBLib\src\usb_init.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_int.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\USBLib\src\usb_int.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_mem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\USBLib\src\usb_mem.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_regs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\USBLib\src\usb_regs.c</FilePath>
+            </File>
+            <File>
+              <FileName>usb_sil.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\USBLib\src\usb_sil.c</FilePath>
+            </File>
             <File>
               <FileName>usb_core.h</FileName>
               <FileType>5</FileType>
@@ -518,276 +829,6 @@
               <FileName>usb_type.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Source\USBLib\inc\usb_type.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>CMSIS</GroupName>
-          <Files>
-            <File>
-              <FileName>core_cm4.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS\core_cm4.h</FilePath>
-            </File>
-            <File>
-              <FileName>core_cm4_simd.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS\core_cm4_simd.h</FilePath>
-            </File>
-            <File>
-              <FileName>core_cmFunc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS\core_cmFunc.h</FilePath>
-            </File>
-            <File>
-              <FileName>core_cmInstr.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS\core_cmInstr.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS\stm32f30x.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS\stm32f30x_conf.h</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f30x.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\CMSIS\system_stm32f30x.c</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f30x.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS\system_stm32f30x.h</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>SPL</GroupName>
-          <Files>
-            <File>
-              <FileName>stm32f30x_adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_adc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_adc.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_can.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_can.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_can.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_can.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_comp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_comp.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_comp.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_comp.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_crc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_crc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_crc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_crc.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_dac.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_dac.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_dac.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_dac.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_dbgmcu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_dbgmcu.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_dbgmcu.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_dbgmcu.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_dma.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_dma.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_dma.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_exti.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_exti.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_exti.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_exti.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_flash.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_flash.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_gpio.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_gpio.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_i2c.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_i2c.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_i2c.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_iwdg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_iwdg.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_iwdg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_iwdg.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_misc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_misc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_misc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_misc.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_opamp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_opamp.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_opamp.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_opamp.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_pwr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_pwr.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_pwr.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_pwr.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_rcc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_rcc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_rcc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_rcc.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_rtc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_rtc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_rtc.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_rtc.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_spi.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_spi.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_syscfg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_syscfg.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_syscfg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_syscfg.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_tim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_tim.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_tim.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_tim.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_usart.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_usart.h</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_wwdg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_wwdg.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f30x_wwdg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\SPL\stm32f30x_wwdg.h</FilePath>
             </File>
           </Files>
         </Group>
