@@ -48,6 +48,8 @@ extern uint32_t USART_Rx_ptr_out;
 extern uint32_t USART_Rx_length;
 extern uint8_t  USB_Tx_State;
 
+uint8_t needToSend = 0;
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -58,8 +60,8 @@ extern uint8_t  USB_Tx_State;
 * Output         : None.
 * Return         : None.
 *******************************************************************************/
-void EP1_IN_Callback (void)
-{  
+void EP1_IN_Callback (void) 
+{
 }
 
 /*******************************************************************************
@@ -119,6 +121,10 @@ void EP3_OUT_Callback(void)
 			GPIO_ResetLeds();		
 			GPIO_Write(GPIOE, 0xFF00);
 			break;
+        
+        case 0x55:
+            needToSend = 1;
+            break;
 	}
  
   /* Enable the receive of data on EP3 */
