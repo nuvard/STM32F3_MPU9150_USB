@@ -15,9 +15,9 @@ Some useful links (RU & EN):
 
 Connection:
 ```
-MPU-9150			STM32F3DISCOVERY
-GND		--------- 	GND
-VDD 	--------- 	3.3V
-SCL 	--------- 	SCL (PB6)
-SDA 	--------- 	SDA (PB7)
+MPU-9150 	     STM32F3DISCOVERY
+GND	---------    GND
+VDD	---------    3.3V
+SCL	---------    SCL (PB6)
+SDA	---------    SDA (PB7)
 ```
