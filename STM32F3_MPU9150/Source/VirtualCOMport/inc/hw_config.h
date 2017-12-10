@@ -59,6 +59,8 @@ void Handle_USBAsynchXfer (void);
 void Get_SerialNum(void);
 void GPIO_ResetLeds(void);
 
+void Init_I2C(void);
+
 /* External variables --------------------------------------------------------*/
 
 #endif  /*__HW_CONFIG_H*/

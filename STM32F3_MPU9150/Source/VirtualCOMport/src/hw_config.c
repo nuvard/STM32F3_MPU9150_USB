@@ -35,7 +35,6 @@
 #include "hw_config.h"
 #include "usb_pwr.h"
 
-
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -63,7 +62,7 @@ extern LINE_CODING linecoding;
 * Return         : None.
 *******************************************************************************/
 void Set_System(void)
-{
+{    
     GPIO_InitTypeDef GPIO_InitStructure;
 
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
@@ -102,7 +101,6 @@ void Set_System(void)
 void Set_USBClock(void)
 {
   RCC_USBCLKConfig(RCC_USBCLKSource_PLLCLK_1Div5);
-
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_USB, ENABLE);
 }
 

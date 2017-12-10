@@ -32,17 +32,18 @@
 #include "usb_desc.h"
 #include "usb_pwr.h"
 
-
-/* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+#define MPU9150_ADDR        (0x68)<<1   // Default MPU9150 I2C address
+#define MPU9150_WHO_AM_I    0x75        // must return 0x68
+#define I2C_SPEED           400000
+#define TIMING_CLEAR_MASK   ((uint32_t)0xF0FFFFFF)
+
 /* Extern variables ----------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
+extern uint8_t needToSend;
+
 
 /*******************************************************************************
-* Function Name  : Virtual_Com_Write_Buffer.
+* Function Name  : Virtual_Com_Write_Buffer
 * Description    : Transmit through the virtual com tha data.
 * Input          : the buffer that contains the bytes to transmit,
 *                : the number of bytes to transmit
@@ -62,7 +63,7 @@ void Virtual_Com_Write_Buffer(uint8_t* data_buffer, uint8_t size) {
     }
     
     /* wait until the data transmission is finished */
-    while (GetEPTxStatus(ENDP1) == EP_TX_VALID); //0x30
+    while (GetEPTxStatus(ENDP1) == EP_TX_VALID);
 	
     /* Write data to the virtual UART through USB port */
     //UserToPMABufferCopy(&(data_buffer[b_index]), ENDP1_TXADDR, actual_input_size);
@@ -76,18 +77,25 @@ void Virtual_Com_Write_Buffer(uint8_t* data_buffer, uint8_t size) {
   }  
 }
 
+/*******************************************************************************
+* Function Name  : send_packet
+* Description    : Send data to the client application.
+*
+*                  Data is formatted as follows:
+*                  packet[0]    = $
+*                  packet[1]    = packet type (see packet_type_e)
+*                  packet[2+]   = data
+*
+* Input          : packet type (see packet_type_e),
+*                : the buffer that contains the bytes to transmit
+* Return         : none.
+*******************************************************************************/
 enum packet_type_e {
     PACKET_TYPE_ACCEL,
     PACKET_TYPE_GYRO,
     PACKET_TYPE_COMPASS,
 };
 
-/* Send data to the (Python) client application.
- * Data is formatted as follows:
- * packet[0]    = $
- * packet[1]    = packet type (see packet_type_e)
- * packet[2+]   = data
- */
 void send_packet(char packet_type, void *data) {
 #define MAX_BUF_LENGTH  (18)
     char buf[MAX_BUF_LENGTH], length;
@@ -111,28 +119,104 @@ void send_packet(char packet_type, void *data) {
 }
 
 /*******************************************************************************
+* Function Name  : I2C_Config
+* Description    : I2C configuration with MPU-9150.
+* Input          : none.
+* Return         : none.
+*******************************************************************************/
+void I2C_Config() {
+    // GPIOB, Pin 6 - SCL, Pin 7 - SDA
+    RCC   -> AHBENR  |= RCC_AHBENR_GPIOBEN;
+    GPIOB -> OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR6 | ~GPIO_OSPEEDER_OSPEEDR7;
+    GPIOB -> MODER   |= GPIO_MODER_MODER6_1 | GPIO_MODER_MODER7_1;
+    GPIOB -> OTYPER  |= GPIO_OTYPER_OT_6 | GPIO_OTYPER_OT_7;    
+    GPIOB -> AFR[0]  |= (4 << 24) | (4 << 28);      // I2C1 functions - Alter functions 4
+
+    RCC  -> APB1ENR  |= RCC_APB1ENR_I2C1EN ;
+    I2C1 -> CR1      |= I2C_CR1_ANFOFF;      // Analog Noise Filter OFF on SDA and SCL
+    I2C1 -> TIMINGR   = I2C_SPEED & TIMING_CLEAR_MASK; // 400 kHz
+    I2C1 -> CR2      |= MPU9150_ADDR;
+    
+    I2C1 -> CR1      |= I2C_CR1_PE;
+}
+
+/*******************************************************************************
+* Function Name  : I2C_write_byte
+* Description    : sending byte to device
+* Input          : I2C slave address, byte for writing
+* Return         : none.
+*******************************************************************************/
+void I2C_write_byte(uint8_t addr, uint8_t data) {
+    I2C1 -> CR2 &= ~(I2C_CR2_RD_WRN);
+    I2C1 -> CR2 |= I2C_CR2_START |  (2 << 16);
+    while(I2C1->CR2 & I2C_CR2_START);
+    
+    I2C1 -> TXDR = addr;
+    while (!(I2C1->ISR & I2C_ISR_TXE));
+
+    I2C1 -> TXDR = data;
+    while (!(I2C1->ISR & I2C_ISR_TXE));
+    
+    I2C1 -> CR2 |= I2C_CR2_STOP;
+    while(I2C1->CR2 & I2C_CR2_STOP);
+}
+
+/*******************************************************************************
+* Function Name  : I2C_read_byte
+* Description    : read byte from device
+* Input          : I2C slave address (or device's register address)
+* Return         : none.
+*******************************************************************************/
+uint8_t I2C_read_byte(uint8_t addr) {
+    uint8_t data = 0;
+
+    I2C1 -> CR2 &= ~(I2C_CR2_RD_WRN);
+    I2C1 -> CR2 &= ~(0xff << 16);
+    I2C1 -> CR2 |= I2C_CR2_START | (1 << 16);
+    while(I2C1->CR2 & I2C_CR2_START);
+
+    I2C1 -> TXDR = addr;
+    while (!(I2C1->ISR & I2C_ISR_TXE));
+
+    I2C1 -> CR2 |= I2C_CR2_RD_WRN;
+    I2C1 -> CR2 |= I2C_CR2_START | (1 << 16);
+    while(I2C1->CR2 & I2C_CR2_START);
+    
+    while(!(I2C1->ISR & I2C_ISR_RXNE));
+    data = I2C1->RXDR;
+    
+    I2C1 -> CR2 |= I2C_CR2_STOP;
+    while(I2C1->CR2 & I2C_CR2_STOP);
+    
+    return data;
+}
+
+/*******************************************************************************
 * Function Name  : main.
 * Description    : Main routine.
 * Input          : None.
-* Output         : None.
 * Return         : None.
 *******************************************************************************/
-
-extern uint8_t needToSend;
-
 int main(void){
 	Set_System();
 	Set_USBClock();
 	USB_Interrupts_Config();
 	USB_Init();
-  
+    
+    while(bDeviceState != CONFIGURED);  // wait until USB is configured
+    
+    I2C_Config();
+    
 	while (1) {
         if(needToSend) {
-            // usb test
-            Virtual_Com_Write_Buffer("Good", 4);
+            Virtual_Com_Write_Buffer(">>>", 3);
             
-            uint16_t data[] = {4, 5, 6};
-            send_packet(PACKET_TYPE_GYRO, data);
+            uint8_t whoAmI;
+            
+            I2C_write_byte(MPU9150_ADDR, MPU9150_WHO_AM_I);
+            whoAmI = I2C_read_byte(MPU9150_WHO_AM_I);
+            
+            Virtual_Com_Write_Buffer(&whoAmI, 1);   // must send 0x68 (if everything OK)
             
             needToSend = 0;
         }
