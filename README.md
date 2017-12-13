@@ -1,6 +1,6 @@
 InvenSense MPU-9150 Product Specification & Register Map and Descriptions:
 
-* https://store.invensense.com/Datasheets/invensense/RM-MPU-9150A-00-v3.0.pdf
+* https://www.invensense.com/wp-content/uploads/2015/02/MPU-9150-Register-Map.pdf
 * https://www.invensense.com/wp-content/uploads/2015/02/MPU-9150-Datasheet.pdf
 
 Some useful links (RU & EN):
