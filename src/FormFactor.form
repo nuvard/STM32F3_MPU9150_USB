@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="FormFactor">
+  <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="31" column-count="14" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="10" left="10" bottom="10" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="1215" height="1158"/>
+    </constraints>
+    <properties>
+      <background color="-10081498"/>
+      <opaque value="true"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <hspacer id="98aa7">
+        <constraints>
+          <grid row="5" column="0" row-span="16" col-span="1" vsize-policy="1" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="15" height="15"/>
+            <preferred-size width="15" height="15"/>
+            <maximum-size width="15" height="15"/>
+          </grid>
+        </constraints>
+      </hspacer>
+      <hspacer id="716c1">
+        <constraints>
+          <grid row="26" column="13" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="9e84e">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="12" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="100" height="30"/>
+            <preferred-size width="100" height="30"/>
+            <maximum-size width="-1" height="30"/>
+          </grid>
+        </constraints>
+      </hspacer>
+      <vspacer id="97f24">
+        <constraints>
+          <grid row="28" column="3" row-span="2" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="a1bf4">
+        <constraints>
+          <grid row="30" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <grid id="41dff" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="5" column="4" row-span="23" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-11327952"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="11fe7" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-11327952"/>
+              <font name="Moscow Sans Regular" size="16"/>
+              <foreground color="-9992654"/>
+              <horizontalTextPosition value="11"/>
+              <text value="XY"/>
+            </properties>
+          </component>
+          <component id="103dd" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-11327952"/>
+              <font name="Moscow Sans Regular" size="16"/>
+              <foreground color="-9992654"/>
+              <text value="XZ"/>
+            </properties>
+          </component>
+          <component id="aab75" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-11327952"/>
+              <font name="Moscow Sans Regular" size="16"/>
+              <foreground color="-9992654"/>
+              <text value="YZ"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="4117f" binding="area1" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="2" vgap="0">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="5" column="5" row-span="23" col-span="8" vsize-policy="0" hsize-policy="0" anchor="1" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="600" height="600"/>
+            <preferred-size width="600" height="600"/>
+            <maximum-size width="600" height="600"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12055012"/>
+          <enabled value="true"/>
+          <visible value="true"/>
+        </properties>
+        <border type="none">
+          <size top="5" left="5" bottom="5" right="5"/>
+          <color color="-6833288"/>
+        </border>
+        <children/>
+      </grid>
+      <vspacer id="3a5bd">
+        <constraints>
+          <grid row="1" column="9" row-span="3" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="aa8e0">
+        <constraints>
+          <grid row="27" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <grid id="4a0ec" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="2" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="30"/>
+            <maximum-size width="-1" height="30"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-11327952"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="fb606" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-10081498"/>
+              <font name="Moscow Sans Regular" size="16"/>
+              <foreground color="-9992654"/>
+              <text value="Accel"/>
+            </properties>
+          </component>
+          <component id="91639" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-10081498"/>
+              <font name="Moscow Sans Regular" size="16"/>
+              <foreground color="-9992654"/>
+              <text value="Gyro"/>
+            </properties>
+          </component>
+          <component id="4212f" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-10081498"/>
+              <font name="Moscow Sans Regular" size="16"/>
+              <foreground color="-9992654"/>
+              <text value="Magneto"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <component id="f508a" class="javax.swing.JLabel" binding="Name">
+        <constraints>
+          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-10081498"/>
+          <font name="Moscow Sans Regular" size="24"/>
+          <foreground color="-6240895"/>
+          <horizontalTextPosition value="11"/>
+          <text value="Scope"/>
+        </properties>
+      </component>
+      <vspacer id="3ff7c">
+        <constraints>
+          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="1" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="40"/>
+            <preferred-size width="-1" height="40"/>
+            <maximum-size width="-1" height="40"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <component id="a9c3a" class="javax.swing.JLabel" binding="smth">
+        <constraints>
+          <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Moscow Sans Regular" size="16"/>
+          <foreground color="-6240895"/>
+          <text value="Delicacy"/>
+          <verticalAlignment value="1"/>
+        </properties>
+      </component>
+      <component id="fdb11" class="javax.swing.JSlider" binding="slider1" default-binding="true">
+        <constraints>
+          <grid row="9" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="4" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="-1"/>
+            <preferred-size width="140" height="-1"/>
+            <maximum-size width="140" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-10081498"/>
+          <focusable value="true"/>
+          <font name="Moscow Sans Regular" size="10"/>
+          <foreground color="-6240895"/>
+          <majorTickSpacing value="500"/>
+          <maximum value="1000"/>
+          <minimum value="0"/>
+          <minorTickSpacing value="250"/>
+          <name value="SensSlider"/>
+          <paintLabels value="true"/>
+          <paintTicks value="true"/>
+          <paintTrack value="true"/>
+          <snapToTicks value="true"/>
+        </properties>
+      </component>
+      <vspacer id="242f1">
+        <constraints>
+          <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="40"/>
+            <preferred-size width="-1" height="40"/>
+            <maximum-size width="-1" height="40"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <component id="17caa" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="11" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Moscow Sans Regular" size="14"/>
+          <foreground color="-6240895"/>
+          <text value="Values of Accel"/>
+          <verticalAlignment value="1"/>
+        </properties>
+      </component>
+      <component id="5ea26" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="22" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Moscow Sans Regular" size="14"/>
+          <foreground color="-6240895"/>
+          <text value="Values of Magneto"/>
+          <verticalAlignment value="1"/>
+        </properties>
+      </component>
+      <component id="11f7e" class="javax.swing.JLabel" binding="Gyro">
+        <constraints>
+          <grid row="16" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Moscow Sans Regular" size="14"/>
+          <foreground color="-6240895"/>
+          <text value="Values of Gyro"/>
+          <verticalAlignment value="1"/>
+        </properties>
+      </component>
+      <vspacer id="31dd8">
+        <constraints>
+          <grid row="15" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="15"/>
+            <preferred-size width="-1" height="15"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <vspacer id="430c0">
+        <constraints>
+          <grid row="21" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="-1" height="15"/>
+            <preferred-size width="-1" height="15"/>
+            <maximum-size width="-1" height="15"/>
+          </grid>
+        </constraints>
+      </vspacer>
+      <component id="30579" class="javax.swing.JButton" binding="Kotik">
+        <constraints>
+          <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="140"/>
+            <preferred-size width="140" height="140"/>
+            <maximum-size width="140" height="140"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-10081498"/>
+          <borderPainted value="false"/>
+          <contentAreaFilled value="true"/>
+          <enabled value="true"/>
+          <font name="Magneto" size="14"/>
+          <foreground color="-6240895"/>
+          <hideActionText value="true"/>
+          <icon value="Untitled-1.png"/>
+          <margin top="2" left="0" bottom="2" right="0"/>
+          <opaque value="false"/>
+          <text value=""/>
+          <visible value="true"/>
+        </properties>
+      </component>
+      <component id="87e3a" class="javax.swing.JLabel" binding="CoordsAX">
+        <constraints>
+          <grid row="12" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="-1"/>
+            <preferred-size width="140" height="-1"/>
+            <maximum-size width="140" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12055012"/>
+          <font name="Moscow Sans Regular" size="12"/>
+          <foreground color="-9992654"/>
+          <opaque value="true"/>
+          <text value=" x=, y=,z= "/>
+          <verticalAlignment value="1"/>
+        </properties>
+      </component>
+      <component id="47e2d" class="javax.swing.JLabel" binding="CoordsGX">
+        <constraints>
+          <grid row="17" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="-1"/>
+            <preferred-size width="140" height="-1"/>
+            <maximum-size width="140" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12055012"/>
+          <font name="Moscow Sans Regular" size="12"/>
+          <foreground color="-9992654"/>
+          <opaque value="true"/>
+          <text value=" x=, y=,z= "/>
+          <verticalAlignment value="1"/>
+        </properties>
+      </component>
+      <component id="56d2d" class="javax.swing.JLabel" binding="CoordsMX">
+        <constraints>
+          <grid row="23" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="-1"/>
+            <preferred-size width="140" height="-1"/>
+            <maximum-size width="140" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12055012"/>
+          <font name="Moscow Sans Regular" size="12"/>
+          <foreground color="-9992654"/>
+          <opaque value="true"/>
+          <text value=" x=, y=,z= "/>
+          <verticalAlignment value="1"/>
+        </properties>
+      </component>
+      <component id="3346f" class="javax.swing.JButton" binding="Tale">
+        <constraints>
+          <grid row="26" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-10081498"/>
+          <borderPainted value="false"/>
+          <enabled value="false"/>
+          <focusable value="false"/>
+          <icon value="Untitled-4.png"/>
+          <label value=""/>
+          <opaque value="false"/>
+          <requestFocusEnabled value="true"/>
+          <text value=""/>
+          <visible value="false"/>
+        </properties>
+      </component>
+      <component id="8a89e" class="javax.swing.JLabel" binding="CoordsMY">
+        <constraints>
+          <grid row="24" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="-1"/>
+            <preferred-size width="140" height="-1"/>
+            <maximum-size width="140" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12055012"/>
+          <font name="Moscow Sans Regular" size="12"/>
+          <foreground color="-9992654"/>
+          <opaque value="true"/>
+          <text value=" x=, y=,z= "/>
+          <verticalAlignment value="1"/>
+        </properties>
+      </component>
+      <component id="8195d" class="javax.swing.JLabel" binding="CoordsMZ">
+        <constraints>
+          <grid row="25" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="-1"/>
+            <preferred-size width="140" height="-1"/>
+            <maximum-size width="140" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12055012"/>
+          <font name="Moscow Sans Regular" size="12"/>
+          <foreground color="-9992654"/>
+          <opaque value="true"/>
+          <text value=" x=, y=,z= "/>
+          <verticalAlignment value="1"/>
+        </properties>
+      </component>
+      <component id="e83e8" class="javax.swing.JLabel" binding="CoordsGY">
+        <constraints>
+          <grid row="18" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="-1"/>
+            <preferred-size width="140" height="-1"/>
+            <maximum-size width="140" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12055012"/>
+          <font name="Moscow Sans Regular" size="12"/>
+          <foreground color="-9992654"/>
+          <opaque value="true"/>
+          <text value=" x=, y=,z= "/>
+          <verticalAlignment value="1"/>
+        </properties>
+      </component>
+      <component id="afc7d" class="javax.swing.JLabel" binding="CoordsGZ">
+        <constraints>
+          <grid row="19" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="-1"/>
+            <preferred-size width="140" height="-1"/>
+            <maximum-size width="140" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12055012"/>
+          <font name="Moscow Sans Regular" size="12"/>
+          <foreground color="-9992654"/>
+          <opaque value="true"/>
+          <text value=" x=, y=,z= "/>
+          <verticalAlignment value="1"/>
+        </properties>
+      </component>
+      <component id="b8903" class="javax.swing.JLabel" binding="CoordsAY">
+        <constraints>
+          <grid row="13" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="-1"/>
+            <preferred-size width="140" height="-1"/>
+            <maximum-size width="140" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12055012"/>
+          <font name="Moscow Sans Regular" size="12"/>
+          <foreground color="-9992654"/>
+          <opaque value="true"/>
+          <text value=" x=, y=,z= "/>
+          <verticalAlignment value="1"/>
+        </properties>
+      </component>
+      <component id="1a99d" class="javax.swing.JLabel" binding="CoordsAZ">
+        <constraints>
+          <grid row="14" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="5" fill="0" indent="0" use-parent-layout="false">
+            <minimum-size width="140" height="-1"/>
+            <preferred-size width="140" height="-1"/>
+            <maximum-size width="140" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-12055012"/>
+          <font name="Moscow Sans Regular" size="12"/>
+          <foreground color="-9992654"/>
+          <opaque value="true"/>
+          <text value=" x=, y=,z= "/>
+          <verticalAlignment value="1"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
